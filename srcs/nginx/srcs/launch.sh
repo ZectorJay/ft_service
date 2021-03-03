@@ -1,6 +1,10 @@
-#!/bin/sh
 /usr/bin/ssh-keygen -A
-adduser -D "$SSH_USER"
-echo "$SSH_USER:$SSH_PASSWORD" | chpasswd
 
-/usr/bin/supervisord -c /etc/supervisord.conf
+adduser -D admin -G root
+echo "admin:admin" | chpasswd
+chown -R admin:root /etc/ssh
+
+rc-service telegraf start
+rc-service sshd start
+
+/usr/sbin/nginx -g "daemon off;"
