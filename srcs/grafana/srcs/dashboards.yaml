@@ -1,0 +1,6 @@
+# # config file version
+apiVersion: 1
+providers:
+- name: 'dashboards'
+  options:
+    path: /usr/share/grafana/public/dashboards

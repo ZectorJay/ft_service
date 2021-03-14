@@ -1,31 +1,27 @@
 FROM alpine:3.12
 
-EXPOSE 5050
-
-#updating OS
 RUN echo "http://dl-2.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
+
 RUN apk update
-RUN apk	upgrade
-RUN apk add openrc
-RUN apk add telegraf
-RUN	apk add vim
-RUN apk add wget
-RUN apk add nginx
 
-RUN apk add php7-fpm php7 php7-mysqli \
-	php7-mbstring php7-json php7-session
+RUN apk add php7-common php7-iconv php7-json php7-gd php7-curl \
+ && apk add php7-xml php7-mysqli php7-imap php7-cgi fcgi php7-pdo php7-pdo_mysql \
+ && apk add php7-soap php7-xmlrpc php7-posix php7-mcrypt php7-gettext php7-ldap \
+ && apk add php7-ctype php7-dom \
+ && apk add php php-fpm nginx telegraf openrc && mkdir /run/nginx;
 
-RUN wget http://wordpress.org/latest.tar.gz
-RUN tar -xzvf latest.tar.gz && rm latest.tar.gz
-RUN mv wordpress /var/www/localhost/htdocs/wordpress
-COPY srcs/wp-config.php /var/www/html/wordpress/wp-config.php
+COPY srcs/telegraf.conf /etc/
+COPY srcs/check.sh /
 
-#nginx setups
-RUN mkdir -p /run/nginx/
-RUN adduser -D -g 'www' www
-RUN mkdir /www
-COPY /srcs/default.conf /etc/nginx/conf.d/default.conf
+WORKDIR /var/www/localhost/htdocs
 
-COPY /srcs/launch.sh /
-RUN chmod 755 /launch.sh
-CMD /launch.sh
+RUN wget http://wordpress.org/latest.tar.gz && \
+    tar -xzvf latest.tar.gz && \
+    rm latest.tar.gz && cd /
+
+COPY srcs/wp-config.php /var/www/localhost/htdocs/wordpress
+
+COPY srcs/default.conf /etc/nginx/conf.d
+COPY /srcs/start.sh .
+
+ENTRYPOINT sh start.sh

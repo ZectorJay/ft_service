@@ -1,0 +1,37 @@
+apiVersion: 1
+datasources:
+- name: influxDB
+  type: influxdb
+  url: http://influxdb-svc:8086
+  database: influxdb
+  editable: false
+- name: mysql
+  type: influxdb
+  url: http://influxdb-svc:8086
+  database: mysql
+  editable: false
+- name: nginx
+  type: influxdb
+  url: http://influxdb-svc:8086
+  database: nginx
+  editable: false
+- name: phpmyadmin
+  type: influxdb
+  url: http://influxdb-svc:8086
+  database: phpmyadmin
+  editable: false
+- name: wordpress
+  type: influxdb
+  url: http://influxdb-svc:8086
+  database: wordpress
+  editable: false
+- name: grafana
+  type: influxdb
+  url: http://influxdb-svc:8086
+  database: grafana
+  editable: false
+- name: ftps
+  type: influxdb
+  url: http://influxdb-svc:8086
+  database: ftps
+  editable: false

@@ -4,7 +4,7 @@
 #ln -s ~/goinfre/docker ~/Library/Containers/com.docker.docker
 brew install kubectl
 rm -f .minikube
-brew install minikube
-minikube start --vm-driver=virtualbox
-mv .minikube goinfre/.minikube
+mkdir -p ~/goinfre/.minikube
 ln -s ~/goinfre/.minikube .minikube
+brew install minikube
+minikube start --driver=virtualbox --memory=4096 --cpus=3

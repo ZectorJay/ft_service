@@ -1,35 +1,48 @@
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
-  name: mysql
-  labels:
-    app: mysql
+  name: mysql-svc
 spec:
   type: ClusterIP
+  clusterIP: 10.99.10.10
   selector:
-    app: mysql
+    app: mysqlPod
   ports:
-  - name: mysql
-    port: 3306
+      - port: 3306
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mysql
-  labels:
-    app: mysql
 spec:
-  strategy:
-    type: Recreate
-  selector:
-    matchLabels:
-      app: mysql
   template:
     metadata:
+      name: mysql-pod
       labels:
-        app: mysql
+        app: mysqlPod
     spec:
-      containers:
-      - name: mysql
-        image: mysql_image
-        imagePullPolicy: Never
+      containers: 
+        - name: mysqlcontainer
+          image: mysql_image
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - mountPath: "/var/lib/mysql"
+              name: mysql
+          livenessProbe:
+            exec:
+              command:
+                - sh
+                - /check.sh
+            initialDelaySeconds: 60
+            periodSeconds: 15
+          imagePullPolicy: Never
+      volumes:
+        - name: mysql
+          hostPath:
+            path: /mnt/mysql
+            type: Directory
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysqlPod

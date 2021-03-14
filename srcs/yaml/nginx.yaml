@@ -21,12 +21,10 @@ spec:
     protocol: TCP
   selector:
     app: nginx-app
-
 ---
-
 apiVersion: apps/v1
 kind: Deployment
-metadata:
+metadata:       #info to identify deploy (for ex. name is needed to connect service with deploy)
   name: nginx-dep
   labels:
     app: nginx-app
@@ -40,21 +38,19 @@ spec:
       labels:
         app: nginx-app
     spec:
-      containers:
-      - name: nginx
-        image: nginx_image
-        ports:
-        - containerPort: 80
-          name: http
-        - containerPort: 443
-          name: https
-        - containerPort: 22
-          name: ssh
-        imagePullPolicy: Never
-        livenessProbe:
+      containers: 
+        - name: nginx
+          image: nginx_image
+          ports:
+            - name: http
+              containerPort: 80
+            - name: https
+              containerPort: 443
+          livenessProbe:
             exec:
               command:
-              - sh
-              - check.sh
-            initialDelaySeconds: 90
+                - sh
+                - /check.sh
+            initialDelaySeconds: 30
             periodSeconds: 10
+          imagePullPolicy: Never 
