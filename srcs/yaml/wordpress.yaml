@@ -7,38 +7,35 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - name: wodpress
-    port: 5050
+  - port: 5050
     targetPort: 5050
   selector:
-    app: wodpressPod
+    app: wodpress-app
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: wordpress
+  name: wordpress-dep
 spec:
   template:
     metadata:
-      name: wordpress-pod
+      name: wordpress
       labels:
-        app: wodpressPod
+        app: wodpress-app
     spec:
       containers: 
-        - name: wordpresscontainer
+        - name: wordpress
           image: wordpress_image
           ports:
-            - name: wordpress
-              containerPort: 5050
+            - containerPort: 5050
           livenessProbe:
             exec:
               command:
-                - sh
-                - /check.sh
-            initialDelaySeconds: 60
-            periodSeconds: 15
+                - sh /check.sh
+            initialDelaySeconds: 30
+            periodSeconds: 10
           imagePullPolicy: Never
   replicas: 1
   selector:
     matchLabels:
-      app: wodpressPod
+      app: wodpress-app

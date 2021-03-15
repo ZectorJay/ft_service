@@ -6,23 +6,23 @@ spec:
   type: ClusterIP
   clusterIP: 10.99.10.10
   selector:
-    app: mysqlPod
+    app: mysql-app
   ports:
       - port: 3306
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysql
+  name: mysql-dep
 spec:
   template:
     metadata:
-      name: mysql-pod
+      name: mysql
       labels:
-        app: mysqlPod
+        app: mysql-app
     spec:
       containers: 
-        - name: mysqlcontainer
+        - name: mysql
           image: mysql_image
           ports:
             - containerPort: 3306
@@ -34,8 +34,8 @@ spec:
               command:
                 - sh
                 - /check.sh
-            initialDelaySeconds: 60
-            periodSeconds: 15
+            initialDelaySeconds: 30
+            periodSeconds: 10
           imagePullPolicy: Never
       volumes:
         - name: mysql
@@ -45,4 +45,4 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mysqlPod
+      app: mysql-app

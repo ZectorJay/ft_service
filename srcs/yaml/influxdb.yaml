@@ -6,21 +6,20 @@ spec:
   type: ClusterIP
   clusterIP: 10.99.11.11
   selector:
-    app: influxdbPod
+    app: influxdb-app
   ports:
       - port: 8086
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: influxdb
+  name: influxdb-dep
 spec:
   template:
     metadata:
-      name: influxdb-pod
+      name: influxdb
       labels:
-        app: influxdbPod
-        type: influxdbtype
+        app: influxdb-app
     spec:
       containers: 
         - name: influxdbcontainer
@@ -46,5 +45,4 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: influxdbPod
-      type: influxdbtype
+      app: influxdb-app

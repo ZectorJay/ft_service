@@ -25,7 +25,9 @@ COPY srcs/telegraf.conf /root/.telegraf/
 COPY srcs/telegraf.conf /etc/
 
 #get new ssl key
-RUN openssl req -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=RU/ST=Ivanovo/L=IVANOVO/O=42Kazan/OU=Ivan/CN=localhost" -keyout /etc/ssl/cert.key -out /etc/ssl/bundle.crt
+RUN openssl req -newkey rsa:4096 -days 365 -nodes -x509 -subj \
+	"/C=RU/ST=Ivanovo/L=IVANOVO/O=42Kazan/OU=Ivan/CN=localhost" -keyout /etc/ssl/cert.key \
+	-out /etc/ssl/bundle.crt
 RUN chmod 600 /etc/ssl/cert.key /etc/ssl/bundle.crt
 
 #dir for nginx_files

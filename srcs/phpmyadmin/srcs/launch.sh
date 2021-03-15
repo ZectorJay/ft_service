@@ -1,5 +1,5 @@
 openrc
 touch /run/openrc/softlevel
 /etc/init.d/telegraf start
-rc-service sshd start
-/usr/sbin/nginx -g "daemon off;"
+rc-service -v php-fpm7 start
+nginx -g 'daemon off;'
