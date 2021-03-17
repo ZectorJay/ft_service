@@ -15,7 +15,7 @@ COPY srcs/mariadb-server.cnf /etc/my.cnf.d
 COPY srcs/wp.sql .
 COPY srcs/telegraf.conf /etc/
 COPY srcs/pma.sql .
-COPY srcs/mysql.sh .
+COPY srcs/launch.sh .
 COPY srcs/check.sh /
 
 
@@ -23,4 +23,4 @@ VOLUME [ "/var/lib/mysql" ]
 
 EXPOSE 3306
 
-ENTRYPOINT sh mysql.sh
+ENTRYPOINT sh /launch.sh

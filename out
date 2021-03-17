@@ -1,0 +1,17 @@
+total 80
+drwxr-xr-x  15 hmickey  student   510 Mar 17 18:34 .
+drwxr-xr-x@ 29 hmickey  student   986 Mar 10 19:26 ..
+-rw-r--r--@  1 hmickey  student  6148 Mar 15 16:25 .DS_Store
+drwxr-xr-x  12 hmickey  student   408 Feb 28 02:56 .git
+lrwxr-xr-x   1 hmickey  student    32 Mar 17 15:05 .minikube -> /Users/hmickey/goinfre/.minikube
+drwxr-xr-x   3 hmickey  student   102 Mar  7 11:59 .vscode
+-rwxr-xr-x   1 hmickey  student   421 Mar 15 12:08 get_another_sit.sh
+-rwxr-xr-x   1 hmickey  student    97 Mar 10 17:37 mini_reinstall.sh
+-rwxr-xr-x   1 hmickey  student   190 Mar 15 23:29 mysqlreinstall.sh
+-rwxr-xr-x   1 hmickey  student   190 Mar 15 18:41 nginxreinstall.sh
+-rw-r--r--   1 hmickey  student     0 Mar 17 18:34 out
+-rwxr-xr-x   1 hmickey  student   208 Mar 14 21:50 phpreinstall.sh
+drwxrwxrwx  11 hmickey  student   374 Mar 10 17:26 srcs
+-rwxr-xr-x   1 hmickey  student   978 Mar 12 16:58 start.sh
+-rwxr-xr-x   1 hmickey  student   210 Mar 15 14:35 wmreinstall.sh
+/Users/hmickey/exercise/ft_service
