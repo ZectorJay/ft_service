@@ -1,3 +1,6 @@
-rc-service php-fpm7 start
-# /etc/init.d/lighttpd restart
-/usr/sbin/nginx -g 'daemon off;'
+openrc
+touch /run/openrc/softlevel
+
+/etc/init.d/telegraf start
+rc-service -v php-fpm7 start
+nginx -g 'daemon off;'

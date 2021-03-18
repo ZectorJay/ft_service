@@ -4,11 +4,14 @@ RUN echo "http://dl-2.alpinelinux.org/alpine/edge/community" >> /etc/apk/reposit
 
 RUN apk update
 
-RUN apk add influxdb openrc telegraf
+RUN apk add influxdb
+RUN apk add openrc
+RUN apk add telegraf
 
-RUN openrc && touch /run/openrc/softlevel
+RUN openrc
+RUN touch /run/openrc/softlevel
 
-COPY srcs/influxdb.sh .
+COPY srcs/launch.sh /
 COPY srcs/check.sh /
 COPY srcs/telegraf.conf /etc/
 
@@ -16,4 +19,4 @@ VOLUME [ "/var/lib/influxdb" ]
 
 EXPOSE 8086
 
-ENTRYPOINT sh influxdb.sh
+ENTRYPOINT sh launch.sh
